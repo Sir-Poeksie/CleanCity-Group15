@@ -1,170 +1,155 @@
-# Final Test Report – CleanCity Scheduler 
+# CleanCity - Test Plan
 
-**Version:** 1.0  
-**Tester:** Mpumelelo Theophilas Nxazonke  
-**Date:** 2025-06-23  
-**Environment:** Chrome 125 (Windows 10), VS Code, GitHub  
-**Test Tools:** Jest, GitHub Issues, Manual Testing  
-
----
-
-## 1. Test Plan  
-
-[View Full Test_Plan.md](./final_docs/Test_Plan.md)
-
-### Summary:
-
-- **Objectives**: Verify functionality of game features and UI, validate scoring and input logic, ensure traceability.
-- **Scope**: Functional testing of word scramble, scoring, hints, JSON loading, basic UI responsiveness.
-- **Resources**: Tester, QA Reviewers, VS Code, Chrome, GitHub.
-- **Schedule**: 2025-06-21 → 2025-06-24.
-- **Entry Criteria**: Code pushed to GitHub, word bank integrated.
-- **Exit Criteria**: All high-priority tests executed; major bugs logged.
+**Document Version:** 1.0  
+**Date:** 2025-07-08  
+**Author:** Mpumelelo Theophilas Nxazonke (@Sir-Poeksie)  
+**Project:** CleanCity - Waste Pickup Scheduler  
+**Phase:** Test Planning (STLC Phase 2)  
 
 ---
 
-## 2. Test Strategy  
+## 1. Introduction
 
-[View Full Test_Strategy.md](./final_docs/Test_Strategy.md)
+### 1.1 Purpose
 
-### Testing Approach:
+This document outlines the test planning activities, scope, strategy, schedule, resources, and entry/exit criteria for testing the CleanCity Waste Pickup Scheduler application. The purpose is to ensure structured and traceable QA processes aligned with the STLC model.
 
-- **Unit Testing**: Pure logic tested using Jest (e.g., word scrambling, score updates).
-- **Functional Testing**: Manual interaction in the browser (Chrome).
-- **Exploratory Testing**: Manual checks for unexpected behavior.
-- **Defect Tracking**: Via GitHub Issues, linked to test cases.
-- **Risk-Based Testing**: Focused on scoring, hint logic, JSON load.
+### 1.2 Objective
+
+The objective is to validate that the CleanCity application meets its specified functional and non-functional requirements, is user-friendly, and performs reliably across supported platforms and browsers.
 
 ---
 
-## 3. Risk Analysis  
+## 2. Scope
 
-[View Full Risk_Analysis.md](./final_docs/Risk_Analysis.md)
+### 2.1 In Scope
 
-| Risk Description                     | Likelihood | Impact | Mitigation                                |
-|-------------------------------------|------------|--------|-------------------------------------------|
-| Score does not reset correctly      | Medium     | High   | Test new game → reset validation (TC10)   |
-| Hint system deducts too many points | Medium     | High   | Restrict deduction → single trigger logic |
-| Word not scrambled                  | Low        | Medium | Loop until scramble ≠ original (TC02)     |
-| UI breaks on mobile                 | Medium     | Low    | Responsive checks (TC14)                  |
+| Feature / Module                    | Included Testing Areas                            |
+|-------------------------------------|---------------------------------------------------|
+| Pickup Request Form                 | Field validation, scheduling logic, error states  |
+| Dashboard Filtering                 | Filter accuracy, status labels, sorting bugs      |
+| Feedback Page                       | Form validation, request ID checks                |
+| Admin Panel                         | Request status updates, data display              |
+| Notifications                       | Unread count, alert types                         |
+| Accessibility                       | Alt-text, tab order, contrast                     |
+| Responsive Design                   | Layout integrity across screen sizes              |
 
-### Two risks materialized:
+### 2.2 Out of Scope
 
-- TC10 – Score reset failed
-- TC14 – Layout not mobile responsive  
-
-### Risk Coverage:
-
-```mermaid
-pie
-    title Risk Coverage
-    "Covered by Tests" : 75
-    "Uncovered Risks" : 25
-```
+| Area                                | Rationale                                          |
+|-------------------------------------|----------------------------------------------------|
+| Backend/API testing                 | No backend (localStorage only)                     |
+| Real-time updates                   | Not supported in current architecture              |
+| Performance under high load         | Client-side only; no server stress testing possible|
 
 ---
 
-## 4. Traceability Matrix  
+## 3. Test Approach
 
-[View Full Traceability_Matrix.md](./docs/Traceability_Matrix.md)
+### 3.1 Testing Methods
 
-| **Requirement ID** | **Test Case ID** | **Status**  | **Bug Reference**                         |
-|--------------------|------------------|-------------|-------------------------------------------|
-| FR1–FR9            | TC01–TC13        |  Pass       |                                           |
-| FR10               | TC-10            |  Fail       | [Issue #1: TC10_ResetFail](link)          |
-| NFR1               | TC-14            |  Fail       | [Issue #2: TC14_ResponsiveLayoutFail](link) |
-| NFR2–NFR4, UX      | TC15–TC18        |  Pass       |                                           |
-| Error Handling     | TC19             |  Pass       |                                           |
-| Performance        | TC20             |  Pass       |                                           |
+| Type             | Details                                                             |
+|------------------|---------------------------------------------------------------------|
+| Manual Testing   | UI/UX testing, form validation, edge cases, exploratory testing     |
+| Automated Testing| Core logic using Jest; UI flow via Cypress where feasible           |
 
-**Requirement Coverage Summary:**
+### 3.2 Testing Techniques
 
-- **FR1**: TC-01, TC-02
-- **FR4 (Scoring)**: TC-05, TC-06
-- **FR6 (Hint)**: TC-08, TC-09
-- **FR7 (Reset)**: TC-10 [Bug Report Linked]
-- **FR9 (JSON)**: TC-12 
-- **NFR1**: TC-14
-
-**Coverage Status**:  
-All functional and non-functional requirements have at least one test case assigned. Bug tracking is active via GitHub Issues.
+- **Black-box Testing**: Functional validation (UI behavior, field validation)
+- **White-box Testing**: Coverage of pure logic functions (e.g. localStorage interaction)
+- **Boundary Value Analysis**: Input length, date boundaries
+- **Equivalence Partitioning**: Valid/Invalid inputs for scheduling and login
+- **Decision Table Testing**: Request approval logic (Admin module)
 
 ---
 
-## 5. Test Cases  
+## 4. Tools & Environment
 
-[View Full Test_Cases.md](./docs/Test_Cases.md)  
-
-20 test cases were created based on the requirements. Each test case contains:
-
-- Test ID
-- Description
-- Expected Result
-- Status (pass/fail)
-- Linked Bug Report (if applicable)
-
----
-
-## 6. Test Execution Summary
-
-[View Full Test_Execution_Report.md](./docs/Test_Execution_Report.md)
-
-| Metric                    | Result      |
-|---------------------------|-------------|
-| Total Test Cases          | 20          |
-| Passed                    | 18          |
-| Failed                    | 2           |
-| Bugs Logged               | 2           |
-| High-Risk Features Tested | Yes         |
-| Regression Tested         | Yes         |
-| Exploratory Tested        | Yes         |
+| Tool              | Purpose                           |
+|-------------------|------------------------------------|
+| Jest              | Unit testing of logic functions    |
+| Cypress           | Automated E2E flows (UI testing)   |
+| Lighthouse        | Accessibility, performance audits  |
+| Chrome DevTools   | Manual UI/console testing          |
+| GitHub Projects   | Task management and issue tracking |
+| VS Code           | Development & test script writing  |
 
 ---
 
-## 7. Bug Report  
+## 5. Test Schedule
 
-[View Full Bug_Report.md](./docs/Bug_Report.md)
-
-| Bug ID  | Title                         | Severity | Status |
-|---------|-------------------------------|----------|--------|
-| #1      | Score does not reset (TC10)   | High     | Open   |
-| #2      | UI breaks on small screens    | Medium   | Open   |
-
-🖼️ Screenshots attached in `/images/` folder for evidence:  
-
-- `TC10_ResetFail.png`  
-- `TC14_ResponsiveLayoutFail.png`
+| Phase                    | Dates               | Notes                              |
+|--------------------------|---------------------|-------------------------------------|
+| Requirement Analysis     | 26–28 June 2025     | Completed                          |
+| Risk Assessment          | 28–29 June 2025     | Completed                          |
+| Test Planning            | 29–30 June 2025     | Completed by QA Lead               |
+| Test Case Design         | 30 June – 01 July   | In progress                        |
+| Test Execution           | 02–03 July 2025     | Includes manual + automation       |
+| Final Reporting          | 03–04 July 2025     | Compilation + GitHub Issue closure |
 
 ---
 
-## 8. Conclusion & Reflection
+## 6. Entry & Exit Criteria
 
-- The team displayed a habit of working in siloes, often reaching out only when tasks were completed. This resulted in a predominantly single-opinion test approach, highlighting a leadership style that is more laissez-faire and communication that could benefit from increased collaboration among testers.
-- Gaining a thorough understanding of the full Software Testing Life Cycle (STLC) and how its various stages contribute to a cohesive, industry-standard QA reporting workflow has been very insightful.
-- Time management remains a crucial challenge, especially when balancing testing duties alongside other personal commitments. Greater mindfulness and realistic scheduling are essential for future projects.
-- Performing a risk analysis proved invaluable, allowing me to focus on features most critical to gameplay stability, such as scoring and hint logic, rather than spreading efforts too thin.
-- Trade-offs were necessary between comprehensive UI testing coverage and deep testing of high-risk, core functional features, given the limited timeframe.
-- While adopting Jest for unit and logic testing could have earned bonus points and helped detect subtle bugs beyond the UI layer, time constraints led to deprioritizing this approach.
-- Overall, the core functionality of the Word Puzzle Game is working as expected, with all logic-related test cases (scrambling, scoring, hints, input validation) passing successfully.
-- However, UI-related bugs remain open and must be addressed prior to production deployment to ensure a polished user experience.
+### 6.1 Entry Criteria
 
----
+- Functional & non-functional requirements gathered
+- Risk Analysis completed
+- Test Plan approved
+- App is installable and functioning on localhost
+- GitHub Issues enabled for bug tracking
 
-## Checklist
+### 6.2 Exit Criteria
 
-- [x] Test Plan created and reviewed  
-- [x] Test Strategy implemented  
-- [x] Risk Analysis conducted  
-- [x] Test Cases written and linked  
-- [x] Bugs reported via GitHub  
-- [x] Test Execution completed and logged  
-- [x] Final Test Report compiled  
+- All high and medium severity test cases executed
+- All critical bugs resolved or logged
+- Test Report Summary completed and submitted
+- Traceability Matrix confirms requirement coverage
 
 ---
 
-## Related Links
+## 7. Resources & Roles
 
-- [GitHub Project Board](https://github.com/orgs/PLP-Database-Design/projects/2)
-- [GitHub Issues](https://github.com/PLP-Database-Design/week-5-Sir-Poeksie/issues)
+| Role             | Name                          | Responsibility                     |
+|------------------|-------------------------------|------------------------------------|
+| QA Team Lead     | Mpumelelo Nxazonke (@Sir-Poeksie) | All phases of STLC execution      |
+| Testers          | *Team Assigned, Unresponsive* | *N/A – Work performed solo*       |
+
+---
+
+## 8. Risks & Mitigation
+
+| Risk                             | Likelihood | Impact | Mitigation                                      |
+|----------------------------------|------------|--------|-------------------------------------------------|
+| Limited team participation       | High       | High   | Proceed solo; document clearly                  |
+| Limited testing time            | High       | Medium | Focus on core modules + automation              |
+| UI coverage gaps                | Medium     | Medium | Prioritize risk-based testing                   |
+| Incomplete test environment setup | Medium     | Low    | Focus on Chrome + localStorage flow             |
+
+---
+
+## 9. Test Deliverables
+
+| Document / Artifact   | Description                              |
+|---------------------- |------------------------------------------|
+| `App_Requirements.md` | Functional & Non-Functional requirements |
+| `Risk_Analysis.md` | Matrix + categorization |
+| `Test_Strategy.md` | Strategy, tools, testing types |
+| `Test_Cases.md` | All manual and automated cases |
+| `Traceability_Matrix.md` | Functional Requirements -> Test Case Mapping |
+| `Defect_Report.md` | Logged issues and resolution status |
+| `Test_Report_Summary.md` | Final metrics, reflections, overview |
+
+---
+
+## Review & Execution Context
+
+> *Note:* Due to repeated non-participation and lack of communication from assigned team members, this Test Plan has been drafted and finalized by the QA Team Lead.
+
+All outlined tasks, coverage, and schedules reflect the solo execution of this QA cycle under academic and professional obligations.
+
+**Test Plan Author:**  
+Mpumelelo Theophilas Nxazonke (@Sir-Poeksie)  
+**Date Finalized:** 2025-07-08
 
 ---

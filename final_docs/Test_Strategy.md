@@ -79,12 +79,14 @@ To define the strategy for testing the CleanCity Web Application, ensuring that 
 ## 6. Entry & Exit Criteria
 
 ### Entry Criteria
+
 - The React application is available via `npm start`
 - All required pages/components are implemented
 - Test data is available in localStorage or JSON mock
 - Team access to GitHub repo & testing environments is confirmed
 
 ### Exit Criteria
+
 - All high-priority test cases have passed
 - No critical or blocker bugs remain unresolved
 - Defect density is within acceptable limits (<10%)
@@ -115,6 +117,7 @@ Due to tight timelines and the repetitive nature of the core flows, automation w
 - Cross-browser flow validation (Selenium)
 
 Manual tests will still be applied to:
+
 - Visual layout
 - Accessibility
 - Mobile responsiveness
