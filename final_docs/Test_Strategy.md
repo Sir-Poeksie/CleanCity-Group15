@@ -15,14 +15,14 @@ To define the strategy for testing the CleanCity Web Application, ensuring that 
 
 ## 2. Scope of Testing
 
-| **In Scope**                                                                 | **Out of Scope**                        |
-|------------------------------------------------------------------------------|------------------------------------------|
-| User registration and login functionality                                   | Backend/API integration (no backend)     |
-| Waste pickup request creation and cancellation                              | Payment gateway or notifications via SMS |
-| Role-based access for Admin/User                                            | Backend database persistence             |
-| Admin panel controls and filtering                                          | Server load balancing                    |
-| Dashboard charts, analytics, and reports                                    | Server-side encryption                   |
-| Community post creation and feedback forms                                  | Multilingual support                     |
+| **In Scope**                                   | **Out of Scope**                         |
+|------------------------------------------------|------------------------------------------|
+| User registration and login functionality      | Backend/API integration (no backend)     |
+| Waste pickup request creation and cancellation | Payment gateway or notifications via SMS |
+| Role-based access for Admin/User               | Backend database persistence             |
+| Admin panel controls and filtering             | Server load balancing                    |
+| Dashboard charts, analytics, and reports       | Server-side encryption                   |
+| Community post creation and feedback forms     | Multilingual support                     |
 
 ---
 

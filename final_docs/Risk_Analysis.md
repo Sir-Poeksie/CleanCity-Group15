@@ -19,9 +19,9 @@ This document outlines potential **risks** associated with the CleanCity Waste P
 
 ## 2. Risk Matrix
 
-| ID   | Feature / Module | Risk Description                                                       | Likelihood | Impact  | Priority | Mitigation Strategy |
-|------|------------------------|------------------------------------------------------------------|------------|---------|----------|----------------------|
-| R1   | Waste Pickup Form      | User can schedule multiple pickups on same day | High | High | Critical | Add date validation; disable same-day duplicate |
+| ID | Feature / Module | Risk Description                           | Likelihood | Impact  | Priority | Mitigation Strategy |
+|----|------------------|--------------------------------------------|------------|---------|----------|----------------------|
+| R1 | Waste Pickup Form | User can schedule multiple pickups on same day | High | High | Critical | Add date validation; disable same-day duplicate |
 | R2   | Form Validation        | Missing validation on date/time fields | Medium | High | High | Enforce required inputs and field constraints |
 | R3   | Admin Request Control  | Admins can assign past dates or invalid times | Medium | Medium  | High | Restrict time inputs to future only |
 | R4   | Dashboard              | Environmental metrics calculated inaccurately | Medium | High | High | Write unit tests for calculations |

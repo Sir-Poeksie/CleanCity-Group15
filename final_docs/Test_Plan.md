@@ -85,7 +85,7 @@ The objective is to validate that the CleanCity application meets its specified 
 | Test Planning            | 29–30 June 2025     | Completed by QA Lead               |
 | Test Case Design         | 30 June – 01 July   | In progress                        |
 | Test Execution           | 02–03 July 2025     | Includes manual + automation       |
-| Final Reporting          | 03–04 July 2025     | Compilation + GitHub Issue closure |
+| Final Reporting          | 08–09 July 2025     | Compilation + GitHub Issue closure |
 
 ---
 
@@ -110,10 +110,10 @@ The objective is to validate that the CleanCity application meets its specified 
 
 ## 7. Resources & Roles
 
-| Role             | Name                          | Responsibility                     |
-|------------------|-------------------------------|------------------------------------|
-| QA Team Lead     | Mpumelelo Nxazonke (@Sir-Poeksie) | All phases of STLC execution      |
-| Testers          | *Team Assigned, Unresponsive* | *N/A – Work performed solo*       |
+| Role             | Name                          | Responsibility                |
+|------------------|-------------------------------|-------------------------------|
+| QA Team Lead  | Mpumelelo Nxazonke (@Sir-Poeksie) | All phases of STLC execution |
+| Testers       | *Team Assigned, Unresponsive*     | *N/A – Work performed solo*      |
 
 ---
 
