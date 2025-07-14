@@ -11,11 +11,30 @@ module.exports = defineConfig({
     screenshotOnRunFailure: true,
     viewportWidth: 1280,
     viewportHeight: 800,
+    setupNodeEvents(on, config) {
+      // Keep videos even if all tests pass
+      on('after:spec', (spec, results) => {
+        if (results && results.video) {
+          const hasFailures = results.tests.some(t =>
+            t.attempts.some(a => a.state === 'failed')
+          );
+          if (!hasFailures) {
+            // Do not delete the video
+            return;
+          }
+        }
+      });
+
+      // 🐛 Fix: Use CMD instead of PowerShell on Windows
+      config.env.TERM = 'cmd.exe';
+
+      return config;
+    },
   },
   env: {
     TEST_USER_EMAIL: 'user@cleancity.com',
     TEST_USER_PASSWORD: 'password123',
     TEST_ADMIN_EMAIL: 'admin@cleancity.com',
-    TEST_ADMIN_PASSWORD: 'admin123'
-  }
+    TEST_ADMIN_PASSWORD: 'admin123',
+  },
 });

@@ -1,6 +1,8 @@
-import { render } from '@testing-library/react';
-import Login from '../components/Login';
+test('login with valid credentials stores session', () => {
+  render(<Login />);
+  fireEvent.change(screen.getByLabelText(/email/i), { target: { value: 'john@example.com' } });
+  fireEvent.change(screen.getByLabelText(/password/i), { target: { value: 'Passw0rd!' } });
 
-test('renders Login component without crashing', () => {
-  render(<Login onLogin={() => {}} />);
+  fireEvent.click(screen.getByRole('button', { name: /login/i }));
+  expect(localStorage.getItem('userSession')).not.toBeNull();
 });

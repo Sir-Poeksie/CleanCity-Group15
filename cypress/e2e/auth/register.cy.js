@@ -1,18 +1,33 @@
+/**
+ * User Registration E2E tests
+ * Route: /register
+ */
 describe('User Registration', () => {
-  beforeEach(() => cy.visit('/register'));
+  beforeEach(() => {
+    cy.clearCookies();
+    cy.clearLocalStorage();
+    cy.visit('/register');
+    cy.location('pathname').should('eq', '/register');
+  });
 
   it('validates missing fields', () => {
     cy.get('form').submit();
-    cy.contains('Name is required').should('exist');
+
+    cy.get('.register-error')
+      .should('exist')
+      .and('contain', 'fill in all fields');
   });
 
   it('registers a new user', () => {
-    const uniqueEmail = `test${Date.now()}@mail.com`;
-    cy.get('input[name="name"]').type('Test User');
-    cy.get('input[name="email"]').type(uniqueEmail);
-    cy.get('input[name="password"]').type('testpass123');
-    cy.get('input[name="confirmPassword"]').type('testpass123');
+    const timestamp = Date.now();
+    cy.get('[id="register-name"]').type(`Test User ${timestamp}`);
+    cy.get('[id="register-email"]').type(`test${timestamp}@example.com`);
+    cy.get('[id="register-password"]').type('test1234');
     cy.get('form').submit();
-    cy.contains('Registration successful').should('exist');
+
+    // After successful registration, app redirects to /login (per onRegister)
+    cy.location('pathname', { timeout: 10_000 }).should('eq', '/login');
+    cy.contains('Login').should('exist');
   });
 });
+
