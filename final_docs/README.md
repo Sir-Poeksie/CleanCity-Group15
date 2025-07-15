@@ -8,7 +8,7 @@ This repository contains all QA documentation and reports for the CleanCity Wast
 
 ## File Structure
 
-final_docs/
+final_docs/<br>
  ├── README.md
  ├── Test_Plan.md
  ├── Test_Strategy.md
