@@ -9,17 +9,17 @@ This repository contains all QA documentation and reports for the CleanCity Wast
 ## File Structure
 
 final_docs/<br>
- ├── README.md
- ├── Test_Plan.md
- ├── Test_Strategy.md
- ├── Risk_Analysis.md
- ├── Test_Cases.md
- ├── Test_Execution_Report.md
- ├── Test_Report_Summary.md
- ├── Defect_Report.md
- ├── Traceability_Matrix.md
- ├── Regression_Checklist.md
- └── bug-reports/
+ ├── README.md<br>
+ ├── Test_Plan.md<br>
+ ├── Test_Strategy.md<br>
+ ├── Risk_Analysis.md<br>
+ ├── Test_Cases.md<br>
+ ├── Test_Execution_Report.md<br>
+ ├── Test_Report_Summary.md<br>
+ ├── Defect_Report.md<br>
+ ├── Traceability_Matrix.md<br>
+ ├── Regression_Checklist.md<br>
+ └── bug-reports/<br>
   └── Bug_<ID>.md (e.g. Bug_C-201.md)
 
 ---
