@@ -1,0 +1,966 @@
+<html><head><meta charset="utf-8"/><title>Jest Test Report</title><style type="text/css">:root {
+  --text-primary: #111;
+  --text-secondary: #4f4f4f;
+  --success: #006633;
+  --success-bright: #80ffbf;
+  --danger: #cc071e;
+  --danger-bright: #fbdfe0;
+  --warning: #995c00;
+  --warning-bright: #ffeea8;
+  --panel: #eee;
+  --border: #949494;
+  --disabled: #6b6b6b;
+}
+
+html,
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  margin: 0;
+  padding: 0;
+  color: var(--text-primary);
+}
+body {
+  padding: 2rem 1rem;
+}
+.jesthtml-content {
+  margin: 0 auto;
+  max-width: 70rem;
+}
+header {
+  display: flex;
+  align-items: center;
+}
+#title {
+  margin: 0;
+  flex-grow: 1;
+}
+#logo {
+  height: 4rem;
+}
+#timestamp {
+  color: var(--text-secondary);
+  margin-top: 0.5rem;
+}
+
+#metadata-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.additional-information-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  color: var(--text-secondary);
+}
+
+/** SUMMARY */
+#summary {
+  color: var(--text-primary);
+  display: flex;
+  font-family: monospace;
+  font-size: 1rem;
+}
+#summary > div {
+  margin-right: 0.5rem;
+  background: var(--panel);
+  padding: 1rem;
+  min-width: 15rem;
+}
+#summary > div:last-child {
+  margin-right: 0;
+}
+@media only screen and (max-width: 720px) {
+  #summary {
+    flex-direction: column;
+  }
+  #summary > div {
+    margin-right: 0;
+    margin-top: 1rem;
+  }
+  #summary > div:first-child {
+    margin-top: 0;
+  }
+}
+
+.summary-total {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+.summary-passed {
+  color: var(--success);
+  border-left: 0.4rem solid var(--success);
+  padding-left: 0.5rem;
+  margin-bottom: 0.15rem;
+}
+.summary-failed,
+.summary-obsolete-snapshots {
+  color: var(--danger);
+  border-left: 0.4rem solid var(--danger);
+  padding-left: 0.5rem;
+  margin-bottom: 0.15rem;
+}
+.summary-pending {
+  color: var(--warning);
+  border-left: 0.4rem solid var(--warning);
+  padding-left: 0.5rem;
+  margin-bottom: 0.15rem;
+}
+.summary-empty {
+  color: var(--disabled);
+  border-left: 0.4rem solid var(--disabled);
+  margin-bottom: 0.15rem;
+}
+
+.test-result {
+  padding: 1rem;
+  margin-bottom: 0.25rem;
+}
+.test-result:last-child {
+  border: 0;
+}
+.test-result.passed {
+  background-color: var(--success-bright);
+  color: var(--success);
+}
+.test-result.failed {
+  background-color: var(--danger-bright);
+  color: var(--danger);
+}
+.test-result.pending {
+  background-color: var(--warning-bright);
+  color: var(--warning);
+}
+
+.test-info {
+  display: flex;
+  justify-content: space-between;
+}
+.test-suitename {
+  width: 20%;
+  text-align: left;
+  font-weight: bold;
+  word-break: break-word;
+}
+.test-title {
+  width: 40%;
+  text-align: left;
+  font-style: italic;
+}
+.test-status {
+  width: 20%;
+  text-align: right;
+}
+.test-duration {
+  width: 10%;
+  text-align: right;
+  font-size: 0.85rem;
+}
+
+.failureMessages {
+  padding: 0 1rem;
+  margin-top: 1rem;
+  border-top: 1px dashed var(--danger);
+}
+.failureMessages.suiteFailure {
+  border-top: none;
+}
+.failureMsg {
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  word-wrap: break-word;
+}
+
+.suite-container {
+  margin-bottom: 1rem;
+}
+.suite-info {
+  padding: 1rem;
+  background-color: var(--panel);
+  color: var(--text-secondary);
+  border: 0.15rem solid;
+  border-color: var(--panel);
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.25rem;
+}
+.suite-info:hover {
+  border-color: var(--border);
+  cursor: pointer;
+}
+.suite-info .suite-path {
+  word-break: break-all;
+  flex-grow: 1;
+  font-family: monospace;
+  font-size: 1rem;
+}
+.suite-info .suite-time {
+  margin-left: 1rem;
+  padding: 0.2rem 0.3rem;
+  font-size: 0.85rem;
+}
+.suite-info .suite-time.warn {
+  background-color: var(--danger);
+  color: #fff;
+}
+.suite-info:before {
+  content: "\2303";
+  display: inline-block;
+  margin-right: 1rem;
+  transform: rotate(180deg) translateY(0.15rem);
+}
+.suite-container[open] .suite-info:before {
+  transform: rotate(0deg) translateY(0.15rem);
+}
+
+/* CONSOLE LOGS */
+.suite-consolelog {
+  margin-bottom: 0.25rem;
+  padding: 1rem;
+  background-color: var(--panel);
+}
+.suite-consolelog-header {
+  font-weight: bold;
+}
+.suite-consolelog-item {
+  padding: 0.5rem;
+}
+.suite-consolelog-item pre {
+  margin: 0.5rem 0;
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  word-wrap: break-word;
+}
+.suite-consolelog-item-origin {
+  color: var(--text-secondary);
+  font-weight: bold;
+}
+.suite-consolelog-item-message {
+  color: var(--text-primary);
+  font-size: 1rem;
+  padding: 0 0.5rem;
+}
+
+/* OBSOLETE SNAPSHOTS */
+.suite-obsolete-snapshots {
+  margin-bottom: 0.25rem;
+  padding: 1rem;
+  background-color: var(--danger-bright);
+  color: var(--danger);
+}
+.suite-obsolete-snapshots-header {
+  font-weight: bold;
+}
+.suite-obsolete-snapshots-item {
+  padding: 0.5rem;
+}
+.suite-obsolete-snapshots-item pre {
+  margin: 0.5rem 0;
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  word-wrap: break-word;
+}
+.suite-obsolete-snapshots-item-message {
+  color: var(--text-primary);
+  font-size: 1rem;
+  padding: 0 0.5rem;
+}
+</style></head><body><main class="jesthtml-content"><header><h1 id="title">Jest Test Report</h1></header><section id="metadata-container"><div id="timestamp">Started: 2025-07-14 19:51:30</div><div id="summary"><div id="suite-summary"><div class="summary-total">Suites (18)</div><div class="summary-passed ">8 passed</div><div class="summary-failed ">10 failed</div><div class="summary-pending  summary-empty">0 pending</div></div><div id="test-summary"><div class="summary-total">Tests (23)</div><div class="summary-passed ">16 passed</div><div class="summary-failed ">7 failed</div><div class="summary-pending  summary-empty">0 pending</div></div></div></section><details id="suite-1" class="suite-container" open=""><summary class="suite-info"><div class="suite-path">C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\src\_tests_\authService.test.js</div><div class="suite-time">4.345s</div></summary><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">authService</div><div class="test-title">logs in a user</div><div class="test-status">passed</div><div class="test-duration">0.042s</div></div></div><div class="test-result failed"><div class="test-info"><div class="test-suitename">authService</div><div class="test-title">returns null for invalid login</div><div class="test-status">failed</div><div class="test-duration">0.007s</div></div><div class="failureMessages"> <pre class="failureMsg">Error: expect(received).toBeNull()
+
+Received: {"avatar": "https://i.pravatar.cc/100?u=wrong@user.com", "email": "wrong@user.com", "name": "wrong", "role": "user"}
+    at Object.toBeNull (C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\src\_tests_\authService.test.js:11:18)
+    at Promise.then.completed (C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\jest-circus\build\utils.js:298:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\jest-circus\build\utils.js:231:10)
+    at _callCircusTest (C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\jest-circus\build\run.js:316:40)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at _runTest (C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\jest-circus\build\run.js:252:3)
+    at _runTestsForDescribeBlock (C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\jest-circus\build\run.js:126:9)
+    at _runTestsForDescribeBlock (C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\jest-circus\build\run.js:121:9)
+    at run (C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\jest-circus\build\run.js:71:3)
+    at runAndTransformResultsToJestFormat (C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapterInit.js:122:21)
+    at jestAdapter (C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapter.js:79:19)
+    at runTestInternal (C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\jest-runner\build\runTest.js:367:16)
+    at runTest (C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\jest-runner\build\runTest.js:444:34)
+    at Object.worker (C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\jest-runner\build\testWorker.js:106:12)</pre></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">authService</div><div class="test-title">gets current user after login</div><div class="test-status">passed</div><div class="test-duration">0.002s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">authService</div><div class="test-title">logs out the user</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div></div></details><details id="suite-2" class="suite-container" open=""><summary class="suite-info"><div class="suite-path">C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\src\_tests_\dataService.test.js</div><div class="suite-time">0s</div></summary><div class="suite-tests"><div class="test-result failed"><div class="failureMessages suiteFailure"> <pre class="failureMsg">  ● Test suite failed to run
+
+    Cannot find module '../utils/dataService' from 'src/_tests_/dataService.test.js'
+
+    &gt; 1 | import dataService from '../utils/dataService';
+        | ^
+      2 |
+      3 | describe('dataService', () =&gt; {
+      4 |   it('sets and gets items', () =&gt; {
+
+      at Resolver._throwModNotFoundError (node_modules/jest-runtime/node_modules/jest-resolve/build/resolver.js:427:11)
+      at Object.require (src/_tests_/dataService.test.js:1:1)
+</pre></div></div></div></details><details id="suite-3" class="suite-container" open=""><summary class="suite-info"><div class="suite-path">C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\src\_tests_\NotificationBell.test.js</div><div class="suite-time warn">6.173s</div></summary><div class="suite-tests"><div class="test-result failed"><div class="test-info"><div class="test-suitename"> </div><div class="test-title">renders notification bell icon</div><div class="test-status">failed</div><div class="test-duration">0.136s</div></div><div class="failureMessages"> <pre class="failureMsg">TestingLibraryElementError: Unable to find an element with the text: 3. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+
+Ignored nodes: comments, script, style
+&lt;body&gt;
+  &lt;div&gt;
+    &lt;div
+      class="notification-bell"
+    &gt;
+      &lt;button
+        aria-label="0 unread notifications"
+        class="notification-button"
+      &gt;
+        🔔
+      &lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/body&gt;
+    at Object.getElementError (C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\@testing-library\react\node_modules\@testing-library\dom\dist\config.js:37:19)
+    at C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\@testing-library\react\node_modules\@testing-library\dom\dist\query-helpers.js:76:38
+    at C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\@testing-library\react\node_modules\@testing-library\dom\dist\query-helpers.js:52:17
+    at C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\@testing-library\react\node_modules\@testing-library\dom\dist\query-helpers.js:95:19
+    at Object.getByText (C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\src\_tests_\NotificationBell.test.js:6:17)
+    at Promise.then.completed (C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\jest-circus\build\utils.js:298:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\jest-circus\build\utils.js:231:10)
+    at _callCircusTest (C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\jest-circus\build\run.js:316:40)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at _runTest (C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\jest-circus\build\run.js:252:3)
+    at _runTestsForDescribeBlock (C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\jest-circus\build\run.js:126:9)
+    at run (C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\jest-circus\build\run.js:71:3)
+    at runAndTransformResultsToJestFormat (C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapterInit.js:122:21)
+    at jestAdapter (C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapter.js:79:19)
+    at runTestInternal (C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\jest-runner\build\runTest.js:367:16)
+    at runTest (C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\jest-runner\build\runTest.js:444:34)
+    at Object.worker (C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\jest-runner\build\testWorker.js:106:12)</pre></div></div></div></details><details id="suite-4" class="suite-container" open=""><summary class="suite-info"><div class="suite-path">C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\src\_tests_\LandingPage.test.js</div><div class="suite-time warn">6.244s</div></summary><div class="suite-tests"><div class="test-result failed"><div class="test-info"><div class="test-suitename"> </div><div class="test-title">renders landing page heading</div><div class="test-status">failed</div><div class="test-duration">0.174s</div></div><div class="failureMessages"> <pre class="failureMsg">TestingLibraryElementError: Unable to find an element with the text: /Get Started with CleanCity/i. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+
+Ignored nodes: comments, script, style
+&lt;body&gt;
+  &lt;div&gt;
+    &lt;div
+      class="landing-root"
+    &gt;
+      &lt;header
+        class="landing-hero"
+      &gt;
+        &lt;div
+          class="landing-logo"
+        &gt;
+          🧹
+          &lt;span&gt;
+            CleanCity
+          &lt;/span&gt;
+        &lt;/div&gt;
+        &lt;h1
+          class="landing-title"
+        &gt;
+          Waste Pickup Scheduler
+        &lt;/h1&gt;
+        &lt;p
+          class="landing-tagline"
+        &gt;
+          Cleaner streets, greener future. Schedule, track, and join the movement!
+        &lt;/p&gt;
+        &lt;div
+          class="landing-cta"
+        &gt;
+          &lt;a
+            class="cta-btn"
+            href="/register"
+          &gt;
+            Sign Up
+          &lt;/a&gt;
+          &lt;a
+            class="cta-btn secondary"
+            href="/home"
+          &gt;
+            Schedule Pickup
+          &lt;/a&gt;
+          &lt;a
+            class="cta-btn tertiary"
+            href="/blog"
+          &gt;
+            Read Blog
+          &lt;/a&gt;
+        &lt;/div&gt;
+        &lt;div
+          class="landing-hero-animation"
+        /&gt;
+      &lt;/header&gt;
+      &lt;section
+        class="landing-features"
+      &gt;
+        &lt;h2&gt;
+          Features
+        &lt;/h2&gt;
+        &lt;div
+          class="features-list"
+        &gt;
+          &lt;div
+            class="feature-card"
+          &gt;
+            &lt;span
+              aria-label="schedule"
+              role="img"
+            &gt;
+              📅
+            &lt;/span&gt;
+            &lt;h3&gt;
+              Easy Scheduling
+            &lt;/h3&gt;
+            &lt;p&gt;
+              Book waste pickups in seconds, track status, and get reminders.
+            &lt;/p&gt;
+          &lt;/div&gt;
+          &lt;div
+            class="feature-card"
+          &gt;
+            &lt;span
+              aria-label="dashboard"
+              role="img"
+            &gt;
+              📊
+            &lt;/span&gt;
+            &lt;h3&gt;
+              Dashboard
+            &lt;/h3&gt;
+            &lt;p&gt;
+              View, filter, and manage all your requests in one place.
+            &lt;/p&gt;
+          &lt;/div&gt;
+          &lt;div
+            class="feature-card"
+          &gt;
+            &lt;span
+              aria-label="blog"
+              role="img"
+            &gt;
+              📝
+            &lt;/span&gt;
+            &lt;h3&gt;
+              Blog &amp; Community
+            &lt;/h3&gt;
+            &lt;p&gt;
+              Read tips, share stories, and connect with eco-friendly neighbors.
+            &lt;/p&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/section&gt;
+      &lt;section
+        class="landing-testimonials"
+      &gt;
+        &lt;h2&gt;
+          What Our Users Say
+        &lt;/h2&gt;
+        &lt;div
+          class="testimonials-list"
+        &gt;
+          &lt;div
+            class="testimonial"
+          &gt;
+            &lt;p&gt;
+              "
+              CleanCity made waste pickup so easy and reliable!
+              "
+            &lt;/p&gt;
+            &lt;span&gt;
+              - 
+              Jane M.
+            &lt;/span&gt;
+          &lt;/div&gt;
+          &lt;div
+            class="testimonial"
+          &gt;
+            &lt;p&gt;
+              "
+              Our neighborhood is cleaner and greener thanks to CleanCity.
+              "
+            &lt;/p&gt;
+            &lt;span&gt;
+              - 
+              Eco Warriors
+            &lt;/span&gt;
+          &lt;/div&gt;
+          &lt;div
+            class="testimonial"
+          &gt;
+            &lt;p&gt;
+              "
+              Love the dashboard and the community features!
+              "
+            &lt;/p&gt;
+            &lt;span&gt;
+              - 
+              Sam K.
+            &lt;/span&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/section&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/body&gt;
+    at Object.getElementError (C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\@testing-library\react\node_modules\@testing-library\dom\dist\config.js:37:19)
+    at C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\@testing-library\react\node_modules\@testing-library\dom\dist\query-helpers.js:76:38
+    at C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\@testing-library\react\node_modules\@testing-library\dom\dist\query-helpers.js:52:17
+    at C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\@testing-library\react\node_modules\@testing-library\dom\dist\query-helpers.js:95:19
+    at Object.getByText (C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\src\_tests_\LandingPage.test.js:6:17)
+    at Promise.then.completed (C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\jest-circus\build\utils.js:298:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\jest-circus\build\utils.js:231:10)
+    at _callCircusTest (C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\jest-circus\build\run.js:316:40)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at _runTest (C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\jest-circus\build\run.js:252:3)
+    at _runTestsForDescribeBlock (C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\jest-circus\build\run.js:126:9)
+    at run (C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\jest-circus\build\run.js:71:3)
+    at runAndTransformResultsToJestFormat (C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapterInit.js:122:21)
+    at jestAdapter (C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapter.js:79:19)
+    at runTestInternal (C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\jest-runner\build\runTest.js:367:16)
+    at runTest (C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\jest-runner\build\runTest.js:444:34)
+    at Object.worker (C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\jest-runner\build\testWorker.js:106:12)</pre></div></div></div></details><details id="suite-5" class="suite-container" open=""><summary class="suite-info"><div class="suite-path">C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\src\_tests_\Feedback.test.js</div><div class="suite-time warn">6.261s</div></summary><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">Feedback Page</div><div class="test-title">renders feedback form title</div><div class="test-status">passed</div><div class="test-duration">0.156s</div></div></div><div class="test-result failed"><div class="test-info"><div class="test-suitename">Feedback Page</div><div class="test-title">shows error if form submitted empty</div><div class="test-status">failed</div><div class="test-duration">0.028s</div></div><div class="failureMessages"> <pre class="failureMsg">Error: expect(received).toBeInTheDocument()
+
+received value must be an HTMLElement or an SVGElement.
+Received has value: null
+    at __EXTERNAL_MATCHER_TRAP__ (C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\@jest\expect\node_modules\expect\build\index.js:325:30)
+    at Object.throwingMatcher [as toBeInTheDocument] (C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\@jest\expect\node_modules\expect\build\index.js:326:15)
+    at Object.toBeInTheDocument (C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\src\_tests_\Feedback.test.js:14:19)
+    at Promise.then.completed (C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\jest-circus\build\utils.js:298:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\jest-circus\build\utils.js:231:10)
+    at _callCircusTest (C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\jest-circus\build\run.js:316:40)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at _runTest (C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\jest-circus\build\run.js:252:3)
+    at _runTestsForDescribeBlock (C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\jest-circus\build\run.js:126:9)
+    at _runTestsForDescribeBlock (C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\jest-circus\build\run.js:121:9)
+    at run (C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\jest-circus\build\run.js:71:3)
+    at runAndTransformResultsToJestFormat (C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapterInit.js:122:21)
+    at jestAdapter (C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapter.js:79:19)
+    at runTestInternal (C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\jest-runner\build\runTest.js:367:16)
+    at runTest (C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\jest-runner\build\runTest.js:444:34)
+    at Object.worker (C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\jest-runner\build\testWorker.js:106:12)</pre></div></div></div></details><details id="suite-6" class="suite-container" open=""><summary class="suite-info"><div class="suite-path">C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\src\_tests_\Home.test.js</div><div class="suite-time warn">6.278s</div></summary><div class="suite-tests"><div class="test-result failed"><div class="test-info"><div class="test-suitename"> </div><div class="test-title">renders home welcome banner</div><div class="test-status">failed</div><div class="test-duration">0.2s</div></div><div class="failureMessages"> <pre class="failureMsg">TestingLibraryElementError: Unable to find an element with the text: /Welcome to CleanCity/i. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+
+Ignored nodes: comments, script, style
+&lt;body&gt;
+  &lt;div&gt;
+    &lt;div
+      class="home-page-root"
+    &gt;
+      &lt;div
+        aria-label="Waste pickup request form"
+        class="home-card"
+        role="main"
+      &gt;
+        &lt;div
+          class="home-brand"
+        &gt;
+          🧹 
+          &lt;span&gt;
+            CleanCity
+          &lt;/span&gt;
+        &lt;/div&gt;
+        &lt;h2&gt;
+          Schedule a Waste Pickup
+        &lt;/h2&gt;
+        &lt;form&gt;
+          &lt;label
+            for="home-name"
+          &gt;
+            Full Name
+          &lt;/label&gt;
+          &lt;input
+            aria-required="true"
+            id="home-name"
+            placeholder="Full Name"
+            required=""
+            type="text"
+            value=""
+          /&gt;
+          &lt;label
+            for="home-email"
+          &gt;
+            Email
+          &lt;/label&gt;
+          &lt;input
+            aria-required="true"
+            id="home-email"
+            placeholder="Email"
+            required=""
+            type="email"
+            value=""
+          /&gt;
+          &lt;label
+            for="home-location"
+          &gt;
+            Pickup Location
+          &lt;/label&gt;
+          &lt;select
+            aria-required="true"
+            id="home-location"
+            required=""
+          &gt;
+            &lt;option
+              value=""
+            &gt;
+              Select a location
+            &lt;/option&gt;
+            &lt;option
+              value="Nairobi"
+            &gt;
+              Nairobi
+            &lt;/option&gt;
+            &lt;option
+              value="Mombasa"
+            &gt;
+              Mombasa
+            &lt;/option&gt;
+            &lt;option
+              value="Kisumu"
+            &gt;
+              Kisumu
+            &lt;/option&gt;
+            &lt;option
+              value="Eldoret"
+            &gt;
+              Eldoret
+            &lt;/option&gt;
+            &lt;option
+              value="Nakuru"
+            &gt;
+              Nakuru
+            &lt;/option&gt;
+            &lt;option
+              value="Thika"
+            &gt;
+              Thika
+            &lt;/option&gt;
+          &lt;/select&gt;
+          &lt;label
+            for="home-waste"
+          &gt;
+            Waste Type
+          &lt;/label&gt;
+          &lt;select
+            aria-required="true"
+            id="home-waste"
+            required=""
+          &gt;
+            &lt;option
+              value=""
+            &gt;
+              Select waste type
+            &lt;/option&gt;
+            &lt;option
+              value="General Waste"
+            &gt;
+              General Waste
+            &lt;/option&gt;
+            &lt;option
+              value="Recyclable"
+            &gt;
+              Recyclable
+            &lt;/option&gt;
+            &lt;option
+              value="Hazardous"
+            &gt;
+              Hazardous
+            &lt;/option&gt;
+          &lt;/select&gt;
+          &lt;label
+            for="home-date"
+          &gt;
+            Preferred Pickup Date
+          &lt;/label&gt;
+          &lt;input
+            aria-required="true"
+            id="home-date"
+            required=""
+            type="date"
+            value=""
+          /&gt;
+          &lt;label
+            for="home-desc"
+          &gt;
+            Additional Description
+          &lt;/label&gt;
+          &lt;textarea
+            id="home-desc"
+            placeholder="Any additional details about your waste pickup request..."
+            rows="3"
+          /&gt;
+          &lt;button
+            class="home-btn"
+            type="submit"
+          &gt;
+            Submit Request
+          &lt;/button&gt;
+        &lt;/form&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/body&gt;
+    at Object.getElementError (C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\@testing-library\react\node_modules\@testing-library\dom\dist\config.js:37:19)
+    at C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\@testing-library\react\node_modules\@testing-library\dom\dist\query-helpers.js:76:38
+    at C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\@testing-library\react\node_modules\@testing-library\dom\dist\query-helpers.js:52:17
+    at C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\@testing-library\react\node_modules\@testing-library\dom\dist\query-helpers.js:95:19
+    at Object.getByText (C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\src\_tests_\Home.test.js:6:17)
+    at Promise.then.completed (C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\jest-circus\build\utils.js:298:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\jest-circus\build\utils.js:231:10)
+    at _callCircusTest (C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\jest-circus\build\run.js:316:40)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at _runTest (C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\jest-circus\build\run.js:252:3)
+    at _runTestsForDescribeBlock (C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\jest-circus\build\run.js:126:9)
+    at run (C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\jest-circus\build\run.js:71:3)
+    at runAndTransformResultsToJestFormat (C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapterInit.js:122:21)
+    at jestAdapter (C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapter.js:79:19)
+    at runTestInternal (C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\jest-runner\build\runTest.js:367:16)
+    at runTest (C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\jest-runner\build\runTest.js:444:34)
+    at Object.worker (C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\jest-runner\build\testWorker.js:106:12)</pre></div></div></div></details><details id="suite-7" class="suite-container" open=""><summary class="suite-info"><div class="suite-path">C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\src\_tests_\Register.test.js</div><div class="suite-time warn">6.549s</div></summary><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">Register Component</div><div class="test-title">renders registration form</div><div class="test-status">passed</div><div class="test-duration">0.145s</div></div></div><div class="test-result failed"><div class="test-info"><div class="test-suitename">Register Component</div><div class="test-title">shows validation error if fields are empty</div><div class="test-status">failed</div><div class="test-duration">0.31s</div></div><div class="failureMessages"> <pre class="failureMsg">TestingLibraryElementError: Unable to find an element with the text: /fill in all fields/i. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+
+Ignored nodes: comments, script, style
+&lt;body&gt;
+  &lt;div&gt;
+    &lt;div
+      class="register-page-root"
+    &gt;
+      &lt;div
+        aria-label="Register form"
+        class="register-card"
+        role="main"
+      &gt;
+        &lt;div
+          class="register-brand"
+        &gt;
+          🧹 
+          &lt;span&gt;
+            CleanCity
+          &lt;/span&gt;
+        &lt;/div&gt;
+        &lt;h2&gt;
+          Sign Up
+        &lt;/h2&gt;
+        &lt;form&gt;
+          &lt;label
+            for="register-name"
+          &gt;
+            Name
+          &lt;/label&gt;
+          &lt;input
+            aria-required="true"
+            id="register-name"
+            placeholder="Full Name"
+            required=""
+            type="text"
+            value=""
+          /&gt;
+          &lt;label
+            for="register-email"
+          &gt;
+            Email
+          &lt;/label&gt;
+          &lt;input
+            aria-required="true"
+            id="register-email"
+            placeholder="Email"
+            required=""
+            type="email"
+            value=""
+          /&gt;
+          &lt;label
+            for="register-password"
+          &gt;
+            Password
+          &lt;/label&gt;
+          &lt;input
+            aria-required="true"
+            id="register-password"
+            placeholder="Password"
+            required=""
+            type="password"
+            value=""
+          /&gt;
+          &lt;button
+            class="register-btn"
+            type="submit"
+          &gt;
+            Register
+          &lt;/button&gt;
+        &lt;/form&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/body&gt;
+    at Object.getElementError (C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\@testing-library\react\node_modules\@testing-library\dom\dist\config.js:37:19)
+    at C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\@testing-library\react\node_modules\@testing-library\dom\dist\query-helpers.js:76:38
+    at C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\@testing-library\react\node_modules\@testing-library\dom\dist\query-helpers.js:52:17
+    at C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\@testing-library\react\node_modules\@testing-library\dom\dist\query-helpers.js:95:19
+    at Object.getByText (C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\src\_tests_\Register.test.js:15:19)
+    at Promise.then.completed (C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\jest-circus\build\utils.js:298:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\jest-circus\build\utils.js:231:10)
+    at _callCircusTest (C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\jest-circus\build\run.js:316:40)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at _runTest (C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\jest-circus\build\run.js:252:3)
+    at _runTestsForDescribeBlock (C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\jest-circus\build\run.js:126:9)
+    at _runTestsForDescribeBlock (C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\jest-circus\build\run.js:121:9)
+    at run (C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\jest-circus\build\run.js:71:3)
+    at runAndTransformResultsToJestFormat (C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapterInit.js:122:21)
+    at jestAdapter (C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapter.js:79:19)
+    at runTestInternal (C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\jest-runner\build\runTest.js:367:16)
+    at runTest (C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\jest-runner\build\runTest.js:444:34)
+    at Object.worker (C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\jest-runner\build\testWorker.js:106:12)</pre></div></div></div></details><details id="suite-8" class="suite-container" open=""><summary class="suite-info"><div class="suite-path">C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\src\_tests_\Login.test.js</div><div class="suite-time warn">6.774s</div></summary><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">Login Component</div><div class="test-title">renders login form</div><div class="test-status">passed</div><div class="test-duration">0.245s</div></div></div><div class="test-result failed"><div class="test-info"><div class="test-suitename">Login Component</div><div class="test-title">shows error if fields are empty</div><div class="test-status">failed</div><div class="test-duration">0.417s</div></div><div class="failureMessages"> <pre class="failureMsg">TestingLibraryElementError: Unable to find an accessible element with the role "alert"
+
+Here are the accessible roles:
+
+  main:
+
+  Name "Login form":
+  &lt;div
+    aria-label="Login form"
+    class="login-card"
+    role="main"
+  /&gt;
+
+  --------------------------------------------------
+  heading:
+
+  Name "Sign In":
+  &lt;h2 /&gt;
+
+  --------------------------------------------------
+  textbox:
+
+  Name "Email":
+  &lt;input
+    aria-required="true"
+    autocomplete="username"
+    id="login-email"
+    placeholder="Email"
+    required=""
+    type="email"
+    value=""
+  /&gt;
+
+  --------------------------------------------------
+  button:
+
+  Name "Login":
+  &lt;button
+    class="login-btn"
+    type="submit"
+  /&gt;
+
+  --------------------------------------------------
+
+Ignored nodes: comments, script, style
+&lt;body&gt;
+  &lt;div&gt;
+    &lt;div
+      class="login-page-root"
+    &gt;
+      &lt;div
+        aria-label="Login form"
+        class="login-card"
+        role="main"
+      &gt;
+        &lt;div
+          class="login-brand"
+        &gt;
+          🧹 
+          &lt;span&gt;
+            CleanCity
+          &lt;/span&gt;
+        &lt;/div&gt;
+        &lt;h2&gt;
+          Sign In
+        &lt;/h2&gt;
+        &lt;form&gt;
+          &lt;label
+            for="login-email"
+          &gt;
+            Email
+          &lt;/label&gt;
+          &lt;input
+            aria-required="true"
+            autocomplete="username"
+            id="login-email"
+            placeholder="Email"
+            required=""
+            type="email"
+            value=""
+          /&gt;
+          &lt;label
+            for="login-password"
+          &gt;
+            Password
+          &lt;/label&gt;
+          &lt;input
+            aria-required="true"
+            autocomplete="current-password"
+            id="login-password"
+            placeholder="Password"
+            required=""
+            type="password"
+            value=""
+          /&gt;
+          &lt;button
+            class="login-btn"
+            type="submit"
+          &gt;
+            Login
+          &lt;/button&gt;
+        &lt;/form&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/body&gt;
+    at Object.getElementError (C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\@testing-library\react\node_modules\@testing-library\dom\dist\config.js:37:19)
+    at C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\@testing-library\react\node_modules\@testing-library\dom\dist\query-helpers.js:76:38
+    at C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\@testing-library\react\node_modules\@testing-library\dom\dist\query-helpers.js:52:17
+    at C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\@testing-library\react\node_modules\@testing-library\dom\dist\query-helpers.js:95:19
+    at Object.getByRole (C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\src\_tests_\Login.test.js:22:19)
+    at Promise.then.completed (C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\jest-circus\build\utils.js:298:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\jest-circus\build\utils.js:231:10)
+    at _callCircusTest (C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\jest-circus\build\run.js:316:40)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at _runTest (C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\jest-circus\build\run.js:252:3)
+    at _runTestsForDescribeBlock (C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\jest-circus\build\run.js:126:9)
+    at _runTestsForDescribeBlock (C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\jest-circus\build\run.js:121:9)
+    at run (C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\jest-circus\build\run.js:71:3)
+    at runAndTransformResultsToJestFormat (C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapterInit.js:122:21)
+    at jestAdapter (C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapter.js:79:19)
+    at runTestInternal (C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\jest-runner\build\runTest.js:367:16)
+    at runTest (C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\jest-runner\build\runTest.js:444:34)
+    at Object.worker (C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\node_modules\jest-runner\build\testWorker.js:106:12)</pre></div></div></div></details><details id="suite-9" class="suite-container" open=""><summary class="suite-info"><div class="suite-path">C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\src\_tests_\CommunityFeed.test.js</div><div class="suite-time">1.26s</div></summary><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename"> </div><div class="test-title">renders community feed title</div><div class="test-status">passed</div><div class="test-duration">0.058s</div></div></div></div></details><details id="suite-10" class="suite-container" open=""><summary class="suite-info"><div class="suite-path">C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\src\_tests_\BlogAdmin.test.js</div><div class="suite-time">1.276s</div></summary><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename"> </div><div class="test-title">renders blog admin heading</div><div class="test-status">passed</div><div class="test-duration">0.161s</div></div></div></div></details><details id="suite-11" class="suite-container" open=""><summary class="suite-info"><div class="suite-path">C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\src\_tests_\BlogHome.test.js</div><div class="suite-time">1.054s</div></summary><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename"> </div><div class="test-title">renders blog home welcome text</div><div class="test-status">passed</div><div class="test-duration">0.114s</div></div></div></div></details><details id="suite-12" class="suite-container" open=""><summary class="suite-info"><div class="suite-path">C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\src\_tests_\Awareness.test.js</div><div class="suite-time">1.443s</div></summary><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename"> </div><div class="test-title">renders awareness tips and images</div><div class="test-status">passed</div><div class="test-duration">0.311s</div></div></div></div></details><details id="suite-13" class="suite-container" open=""><summary class="suite-info"><div class="suite-path">C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\src\_tests_\BlogArticle.test.js</div><div class="suite-time">2.368s</div></summary><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename"> </div><div class="test-title">renders fallback when article not found</div><div class="test-status">passed</div><div class="test-duration">0.319s</div></div></div></div></details><details id="suite-14" class="suite-container" open=""><summary class="suite-info"><div class="suite-path">C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\src\_tests_\App.test.js</div><div class="suite-time">1.736s</div></summary><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename"> </div><div class="test-title">renders without crashing</div><div class="test-status">passed</div><div class="test-duration">0.198s</div></div></div></div></details><details id="suite-15" class="suite-container" open=""><summary class="suite-info"><div class="suite-path">C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\src\_tests_\Admin.test.js</div><div class="suite-time">1.264s</div></summary><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">Admin Page</div><div class="test-title">renders admin summary and requests table</div><div class="test-status">passed</div><div class="test-duration">0.034s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Admin Page</div><div class="test-title">marks request as completed</div><div class="test-status">passed</div><div class="test-duration">0.03s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Admin Page</div><div class="test-title">deletes a request with confirmation</div><div class="test-status">passed</div><div class="test-duration">0.021s</div></div></div></div></details><details id="suite-16" class="suite-container" open=""><summary class="suite-info"><div class="suite-path">C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\src\_tests_\index.test.js</div><div class="suite-time">0s</div></summary><div class="suite-tests"><div class="test-result failed"><div class="failureMessages suiteFailure"> <pre class="failureMsg">  ● Test suite failed to run
+
+    Cannot find module '../src/App' from 'src/_tests_/index.test.js'
+
+      1 | import React from 'react';
+      2 | import ReactDOM from 'react-dom';
+    &gt; 3 | import App from '../src/App';
+        | ^
+      4 |
+      5 | test('renders App component to DOM', () =&gt; {
+      6 |   const div = document.createElement('div');
+
+      at Resolver._throwModNotFoundError (node_modules/jest-runtime/node_modules/jest-resolve/build/resolver.js:427:11)
+      at Object.require (src/_tests_/index.test.js:3:1)
+</pre></div></div></div></details><details id="suite-17" class="suite-container" open=""><summary class="suite-info"><div class="suite-path">C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\src\_tests_\Dashboard.test.js</div><div class="suite-time">0.949s</div></summary><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename"> </div><div class="test-title">renders dashboard title</div><div class="test-status">passed</div><div class="test-duration">0.054s</div></div></div></div></details><details id="suite-18" class="suite-container" open=""><summary class="suite-info"><div class="suite-path">C:\Users\Theophilas\Desktop\DevProjects\PLPPractice\SoftwareTesting\CleanCity-Group15-1\src\_tests_\PickupForm.test.js</div><div class="suite-time">0s</div></summary><div class="suite-tests"><div class="test-result failed"><div class="failureMessages suiteFailure"> <pre class="failureMsg">  ● Test suite failed to run
+
+    Cannot find module '../src/components/PickupForm' from 'src/_tests_/PickupForm.test.js'
+
+      1 | import { render, screen } from '@testing-library/react';
+    &gt; 2 | import PickupForm from '../src/components/PickupForm';
+        | ^
+      3 |
+      4 | describe('PickupForm', () =&gt; {
+      5 |   it('renders pickup form inputs', () =&gt; {
+
+      at Resolver._throwModNotFoundError (node_modules/jest-runtime/node_modules/jest-resolve/build/resolver.js:427:11)
+      at Object.require (src/_tests_/PickupForm.test.js:2:1)
+</pre></div></div></div></details></main></body></html>

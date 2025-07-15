@@ -1,6 +1,7 @@
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import Home from '../components/Home';
 
-test('renders Home component without crashing', () => {
-  render(<Home user={{ name: 'Test User' }} />);
+test('renders home welcome banner', () => {
+  render(<Home />);
+  expect(screen.getByText(/Welcome to CleanCity/i)).toBeInTheDocument();
 });

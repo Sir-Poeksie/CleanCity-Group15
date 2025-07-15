@@ -1,6 +1,7 @@
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import CommunityFeed from '../components/community/CommunityFeed';
 
-test('renders CommunityFeed component without crashing', () => {
-  render(<CommunityFeed user={{ name: 'Community Member' }} />);
+test('renders community feed title', () => {
+  render(<CommunityFeed />);
+  expect(screen.getByText(/Community Feed/i)).toBeInTheDocument();
 });

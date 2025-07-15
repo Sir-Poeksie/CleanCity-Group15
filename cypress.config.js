@@ -1,3 +1,4 @@
+process.env.ComSpec = 'C:\\Windows\\System32\\cmd.exe';
 const { defineConfig } = require('cypress');
 
 module.exports = defineConfig({
@@ -19,15 +20,13 @@ module.exports = defineConfig({
             t.attempts.some(a => a.state === 'failed')
           );
           if (!hasFailures) {
-            // Do not delete the video
             return;
           }
         }
       });
 
-      // 🐛 Fix: Use CMD instead of PowerShell on Windows
+      // 👇 Override default shell to avoid PowerShell error
       config.env.TERM = 'cmd.exe';
-
       return config;
     },
   },

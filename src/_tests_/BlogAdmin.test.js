@@ -1,6 +1,7 @@
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import BlogAdmin from '../components/blog/BlogAdmin';
 
-test('renders BlogAdmin component without crashing', () => {
-  render(<BlogAdmin user={{ role: 'admin' }} />);
+test('renders blog admin heading', () => {
+  render(<BlogAdmin />);
+  expect(screen.getByText(/Blog Admin Panel/i)).toBeInTheDocument();
 });

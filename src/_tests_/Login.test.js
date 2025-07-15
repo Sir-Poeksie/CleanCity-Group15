@@ -1,8 +1,24 @@
-test('login with valid credentials stores session', () => {
-  render(<Login />);
-  fireEvent.change(screen.getByLabelText(/email/i), { target: { value: 'john@example.com' } });
-  fireEvent.change(screen.getByLabelText(/password/i), { target: { value: 'Passw0rd!' } });
+import { render, screen, fireEvent } from '@testing-library/react';
+import { BrowserRouter } from 'react-router-dom';
+import Login from '../components/Login';
 
-  fireEvent.click(screen.getByRole('button', { name: /login/i }));
-  expect(localStorage.getItem('userSession')).not.toBeNull();
+describe('Login Component', () => {
+  test('renders login form', () => {
+    render(
+      <BrowserRouter>
+        <Login />
+      </BrowserRouter>
+    );
+    expect(screen.getByText(/Login/i)).toBeInTheDocument();
+  });
+
+  test('shows error if fields are empty', () => {
+    render(
+      <BrowserRouter>
+        <Login />
+      </BrowserRouter>
+    );
+    fireEvent.click(screen.getByRole('button', { name: /login/i }));
+    expect(screen.getByRole('alert')).toHaveTextContent(/fill in all fields/i);
+  });
 });

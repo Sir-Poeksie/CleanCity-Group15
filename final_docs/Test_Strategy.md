@@ -141,35 +141,32 @@ Manual tests will still be applied to:
 
 | **Tester**          | **Responsibilities**                                  |
 |---------------------|--------------------------------------------------------|
-| @Sir-Poeksie        | Team Lead, Test Strategy, Test Plan, Risk Analysis     |
-| @Himothy58          | Test Case Design, Exploratory Testing                  |
+| Mpumelelo Theophilas Nxazonke | Team Lead, Test Strategy, Test Plan, Risk Analysis |
+| Kiatane Edwin Timothy | Test Case Design, Exploratory Testing                  |
 | @DAN-HASSAN-INNOVATIONS | App Requirements, Traceability Matrix             |
 
 ---
 
 ## 11. Deliverables
 
-- `SRS.md`
-- `Risk_Analysis.md`
-- `Test_Strategy.md` (this doc)
-- `Test_Plan.md`
-- `Test_Cases.md`
-- `Traceability_Matrix.md`
-- `Test_Execution_Report.md`
+- [SRS.md](../final_docs/SRS.md)
+- [Risk_Analysis.md](../final_docs/Risk_Analysis.md)
+- [Test_Strategy.md](this doc)
+- [Test_Plan.md](../final_docs/Test_Plan.md)
+- [Test_Cases.md](../final_docs/Test_Cases.md)
+- [Traceability_Matrix.md](../final_docs/Traceability_Matrix.md)
+- [Test_Execution_Report.md](../final_docs/Test_Execution_Report.md)
 - `Final_Test_Report.md`
-- GitHub Issues for all defects
-- Screenshots of failed cases
+- [GitHub Issues for all defects](../final_docs/Bugs_To_Raise.md)
+- [Screenshots of failed cases]
 - Reflections and Review notes
 
 ---
 
 ## Review & Execution Context
 
-> *Note:* Due to unforeseen team participation challenges and lack of communication from assigned members, this strategy has been prepared and finalized by the QA Team Lead.
-
-While the original intention was to collaboratively review and agree on the strategy via GitHub Discussions, consistent delays and lack of engagement have necessitated independent completion of this document and related deliverables.
-
-All testing will proceed based on this defined strategy unless future collaboration resumes in time to impact execution.
+> *Note:* Due to unforeseen team participation challenges and lack of communication from assigned members, this strategy has been prepared and finalized by the QA Team Lead. While the original intention was to collaboratively review and agree on the strategy via GitHub Discussions, consistent delays and lack of engagement have necessitated independent completion of this document and related deliverables.
+> All testing will proceed based on this defined strategy unless future collaboration resumes in time to impact execution.
 
 **Lead QA Tester:**  
 Name: *Mpumelelo Theophilas Nxazonke (@Sir-Poeksie)*  

@@ -42,6 +42,9 @@ The objective is to validate that the CleanCity application meets its specified 
 | Real-time updates                   | Not supported in current architecture              |
 | Performance under high load         | Client-side only; no server stress testing possible|
 
+**For Scope please refer to:** [Software Requirements Specification Documentation](../final_docs/SRS.md)
+
+
 ---
 
 ## 3. Test Approach
@@ -60,6 +63,8 @@ The objective is to validate that the CleanCity application meets its specified 
 - **Boundary Value Analysis**: Input length, date boundaries
 - **Equivalence Partitioning**: Valid/Invalid inputs for scheduling and login
 - **Decision Table Testing**: Request approval logic (Admin module)
+
+**For Test Cases Design refer to:** [Test Case.md](../final_docs/Test_Cases.md)
 
 ---
 
@@ -126,6 +131,8 @@ The objective is to validate that the CleanCity application meets its specified 
 | UI coverage gaps                | Medium     | Medium | Prioritize risk-based testing                   |
 | Incomplete test environment setup | Medium     | Low    | Focus on Chrome + localStorage flow             |
 
+**Further Assumptions/Risks can be found here:** [Risk Aanlysis](../final_docs/Risk_Analysis.md)
+
 ---
 
 ## 9. Test Deliverables
@@ -145,11 +152,8 @@ The objective is to validate that the CleanCity application meets its specified 
 ## Review & Execution Context
 
 > *Note:* Due to repeated non-participation and lack of communication from assigned team members, this Test Plan has been drafted and finalized by the QA Team Lead.
-
-All outlined tasks, coverage, and schedules reflect the solo execution of this QA cycle under academic and professional obligations.
+> All outlined tasks, coverage, and schedules reflect the solo execution of this QA cycle under academic and professional obligations.
 
 **Test Plan Author:**  
 Mpumelelo Theophilas Nxazonke (@Sir-Poeksie)  
 **Date Finalized:** 2025-07-08
-
----

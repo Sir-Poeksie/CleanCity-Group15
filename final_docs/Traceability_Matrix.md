@@ -1,49 +1,63 @@
-# Traceability Matrix – 
+# Traceability Matrix – CleanCity Waste Scheduler
 
-*Version:* 1.0  
-*Date:* 2025-06-24  
-*Prepared by:* Mpumelelo Theophilas Nxazonke
+**Version:** 1.0  
+**Date:** 2025-07-15  
+**Prepared by:** Mpumelelo Theophilas Nxazonke  
 
 This matrix ensures all functional and non-functional requirements are covered by at least one test case, helping track coverage and verify completeness of the testing process.
 
-| Req ID | Requirement Description | Test Case ID | Test Case Description | Test Type | Risk ID | Status |
-|--------|-------------------------|--------------|-----------------------|-----------|---------|--------|
-| FR-001 | Register user with email, password, name | TC-001 | Functional | R-001 | Draft |
-| FR-004 | Login with email and password | TC-004 | Functional | R-002| Draft |
-| FR-012 | Schedule pickup (future date) | TC-012 | Functional | R-003 | Draft |
-| FR-020 | Real-time pickup tracking | TC-020 | Functional | R-004 | Draft |
-| FR-023 | Personalized user dashboard | TC-023 | UI | R-005 | Draft |
-| FR-029 | Award badges for milestones | TC-029 | Gamification | R-006 | Draft |
-| FR-045 | View/edit user profiles | TC-045 | Functional | R-007 | Draft |
-| FR-053 | Admin view all pickups | TC-053 | Admin Functional | R-008 | Draft |
-| FR-065 | Notification bell unread count | TC-065 | UI/UX | R-009 | Draft |
-| FR-069 | Responsive design for all viewports | TC-069 | Non-Functional | R-010 | Draft |
-| FR-087 | Clear actionable error messages | TC-087 | UX/Validation | R-011 | Draft | 
+---
 
-Risk Analysis Matrix
+## Product Requirements to Traceability Mapping
 
-| Risk ID | Risk Description | Impact | Likelihood | Priority | Mitigation Strategy |
-|---------|------------------|--------|------------|----------|---------------------|
-| R-001 | Users unable to register due to field validation bugs | High | Medium | High | Validate front-end regex + error messages |
-| R-002 | Login session fails to persist | High | Medium | High | Test localStorage functionality + fallback |
-| R-003 | Pickup scheduling conflicts (duplicate dates) | High | High | Critical | Enforce unique scheduling per date per user |
-| R-004 | Real-time updates missing due to localStorage-only design | Medium |High | Medium | Display clear refresh indicators |
-| R-005 | Dashboard stats display incorrect data | Medium | Medium | Medium | Unit test calculations and rendering logic |
-| R-006 | Badges not awarding despite meeting conditions | Low | Medium | Low | Check logic + badge assignment events |
-| R-007 | Profile updates not persisting | Medium | Medium | Medium | Validate profile object structure in storage |
-| R-008 | Admins mismanage requests due to missing controls | High | Low | Medium | Simulate all admin workflows in tests |
-| R-009 | Notifications not updating read state | Low | Medium | Low | Track state flags per user session |
-| R-010 | App unusable on mobile devices | High | Low | Medium | Manual device testing + media query validation |
-| R-011 | Error messages not guiding users | Medium | Medium | Medium | Heuristic testing for UX validation |
+| PRD Section | Feature             | Traceability ID                |
+| ----------- | ------------------- | ------------------------------ |
+| PRD-1.1     | User Registration   | FR-001 → TC-001                |
+| PRD-1.2     | Login               | FR-004 → TC-004                |
+| PRD-2.0     | Pickup Scheduler    | FR-012 → TC-012                |
+| PRD-3.0     | Dashboard + Stats   | FR-020, FR-023 → TC-011–TC-015 |
+| PRD-4.0     | Admin Management    | FR-053 → TC-025–TC-028         |
+| PRD-5.0     | Feedback + Alerts   | FR-065, FR-087 → TC-016–TC-019 |
+| PRD-6.0     | Community, Blog, UX | FR-029, FR-069 → TC-029–TC-036 |
+
+## Requirements-to-Test Mapping
+
+| Req ID | Requirement Description | Test Case ID | Test Type | Risk ID | Status |
+|--------|--------------------------|--------------|-----------|---------|--------|
+| FR-001 | Register user with email, password, name | TC-001 | Functional | R-001 | Passed |
+| FR-004 | Login with email and password | TC-004 | Functional | R-002 | Partial |
+| FR-012 | Schedule pickup (future date) | TC-012 | Functional | R-003 | Blocked |
+| FR-020 | Real-time pickup tracking | TC-020 | Functional | R-004 | Pass |
+| FR-023 | Personalized user dashboard | TC-023 | UI | R-005 | Pass |
+| FR-029 | Award badges for milestones | TC-029 | Gamification | R-006 | Untested |
+| FR-045 | View/edit user profiles | TC-045 | Functional | R-007 | Pass |
+| FR-053 | Admin view all pickups | TC-053 | Admin Functional | R-008 | Pass |
+| FR-065 | Notification bell unread count | TC-065 | UI/UX | R-009 | Untested |
+| FR-069 | Responsive design for all viewports | TC-069 | Non-Functional | R-010 | Pass |
+| FR-087 | Clear actionable error messages | TC-087 | UX/Validation | R-011 | Failed |
+
+## Risk Status Summary
+
+| Risk ID | Description | Impact | Likelihood | Priority | Status |
+|---------|-------------|--------|------------|----------|--------|
+| R-001 | Registration fails | High | Medium | High | Mitigated |
+| R-002 | Session loss on login | High | Medium | High | Needs Validation |
+| R-003 | Duplicate pickups | High | High | Critical | Confirmed |
+| R-004 | Missing real-time data | Medium | High | Medium | Blocked |
+| R-005 | Dashboard errors | Medium | Medium | Medium | Covered |
+| R-006 | Badges not issued | Low | Medium | Low | Untested |
+| R-007 | Profile not updating | Medium | Medium | Medium | Present |
+| R-008 | Admin mismanagement | High | Low | Medium | Tested |
+| R-009 | Notifications stale | Low | Medium | Low | Untested |
+| R-010 | Breaks on mobile | High | Low | Medium | Untested |
+| R-011 | Poor error messages | Medium | Medium | Medium | Confirmed |
 
 ---
 
-# Notes:
+## Linked QA Docs:
 
-- Use checkboxes to mark test execution status during or after your testing session.
-
-## Cross-References
-
-- Test Design: [Test_Cases.md](./Test_Cases.md)  
-- Risk Areas: [Risk_Analysis.md](./Risk_Analysis.md)  
-- Execution Logs: [Test_Execution_Report.md](./Test_Execution_Report.md)
+- Test Design: [Test_Cases.md](../final_docs/Test_Cases.md)  
+- Risk Areas: [Risk_Analysis.md](../final_docs/Risk_Analysis.md)  
+- Execution Logs: [Test_Execution_Report.md](../final_docs/Test_Execution_Report.md)
+- Test Report: [Test Report Summary](../final_docs/Test_Report_Summary.md)
+- Bug/Defect Report [Defect Report](../final_docs/Defect_Report.md)

@@ -1,6 +1,12 @@
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import { BrowserRouter } from 'react-router-dom';
 import BlogArticle from '../components/blog/BlogArticle';
 
-test('renders BlogArticle component without crashing', () => {
-  render(<BlogArticle user={{ name: 'Test User' }} />);
+test('renders fallback when article not found', () => {
+  render(
+    <BrowserRouter>
+      <BlogArticle />
+    </BrowserRouter>
+  );
+  expect(screen.getByText(/Article not found/i)).toBeInTheDocument();
 });
