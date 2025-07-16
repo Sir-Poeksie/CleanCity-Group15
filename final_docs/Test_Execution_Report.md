@@ -32,11 +32,13 @@ This document summarizes the **Preliminary Test Execution** of the CleanCity Was
 
 ## Overall Execution Summary
 
-| Test Type | Total Tests | Passed | Failed | Pass Rate | Duration |
-|-----------|------------|--------|--------|-----------|----------|
-| **Jest (Unit Tests)**  | 23     | 16     | 7      | 69.6%     | 12.73s   |
-| **Cypress (E2E)**      | 23     | 11     | 12     | 47.8%     | ~1m 35s  |
-| **TOTAL**              | **46** | **27** | **19** | **58.7%** | ~1m 48s  |
+
+| Tool     | Total Test Suites | Tests Run | Passed | Failed | Pass Rate | Duration |
+|----------|-------------------|-----------|--------|--------|-----------|----------|
+| **Jest (Unit Tests)** | 17 | 47 | 31 | 16 | 65.9% | 14.4s |
+| **Cypress (E2E)** | 12 | 31 | 19 | 12 | 61.3% | 2m 15s |
+|          |                   |           |        |        |           |          |
+| **Total**| 29  | 78        | 50     | 28     | **64.1%** | 2m 30s   |
 
 ---
 
@@ -57,72 +59,56 @@ This document summarizes the **Preliminary Test Execution** of the CleanCity Was
 
 ### Code Coverage (Jest)
 
-| Metric     | Coverage |
-|------------|----------|
-| Statements | 42.97%   |
-| Branches   | 27.12%   |
-| Functions  | 35.93%   |
-| Lines      | 45.69%   |
+| **Metric** | **% Coverage** |
+|--------------|------------|
+| Statements | 54.63% |
+| Branches | 35.94% |
+| Functions | 47.61% |
+| Lines | 56.45% |
 
-[HTML Report](../jest-report/report.html)
+> **Note**: Branch and statements coverage is low. Testing priority should focus on business logic (e.g., dataService.js, PickupForm, Dashboard).
+> [HTML Report](../jest-report/report.html)
 
 ---
 
 ## Detailed Cypress Results
 
-| Spec File                         | Total Tests | Passed | Failed | Notes |
-|----------------------------------|-------------|--------|--------|-------|
-| `auth/login.cy.js`               | 2           | 1      | 1      | Alert not triggered |
-| `auth/register.cy.js`            | 2           | 2      | 0      | NA |
-| `admin/requestManagement.cy.js`  | 4           | 4      | 0      | NA |
-| `dashboard/dashboardFilters.cy.js` | 2         | 0      | 2      | `#statusFilter`, `#locationFilter` missing |
-| `awareness/awarenessPage.cy.js`  | 2           | 0      | 2      | `.awareness-card`, `<img>` not found |
-| `feedback/submitFeedback.cy.js`  | 2           | 0      | 2      | Validation message and input not rendered |
-| `home/scheduleRequest.cy.js`     | 2           | 0      | 2      | `#fullName` and form field missing |
-| `pickup/schedulePickup.cy.js`    | 2           | 0      | 2      | `input[name="fullName"]`, `#name-error` missing |
-| `profile/profileAuth.cy.js`      | 2           | 1      | 1      | Redirect assertion failed |
-| `navigation/navLinks.cy.js`      | 3           | 3      | 0      | NA |
+### Passed Test Modules
 
----
-
-## Passed Test Modules
-
-| Module                  | Tests Passed |
-|------------------------|--------------|
-| Admin Request Management | 4/4 |
-| Login                   | 3/3 |
-| Registration            | 3/3 |
-| Dashboard Analytics     | 1/1 |
-| Blog Components         | 4/4 |
-| Awareness Page Load     | 1/1 |
-| Navigation              | 3/3 |
+- `admin/requestManagement.cy.js` (4/4 passed)
+- `auth/register.cy.js`
+- `navigation/navLinks.cy.js`
+- `feedbackForm.cy.js`
+- `register.cy.js`
 
 ---
 
 ## Failed Modules
 
-| Module               | Test Cases Failed | Reason |
-|----------------------|-------------------|--------|
-| PickupForm (Jest)    | 1/1 | Import error |
-| index.test.js (Jest) | 1/1 | Incorrect module path |
-| Feedback Form (Cypress) | 2/2 | `#requestId` not found |
-| Dashboard Filters    | 2/2 | `#statusFilter` not found |
-| Schedule Pickup      | 2/2 | `#fullName` input not rendered |
-| Awareness Page       | 2/2 | `.awareness-card`, `<img>` not found |
-| Profile Auth Guard   | 1/2 | Incorrect redirect assertion |
+| File                                | Tests | Passed | Failed | Duration |
+|-------------------------------------|--------|--------|--------|----------|
+| `auth/login.cy.js`                  | 6      | 4      | 2      | 00:16s   |
+| `awareness/awarenessPage.cy.js`     | 6      | 5      | 1      | 00:43s   |
+| `dashboard/dashboardFilters.cy.js`  | 2      | 0      | 2      | 00:10s   |
+| `feedback/submitFeedback.cy.js`     | 2      | 0      | 2      | 00:09s   |
+| `home/scheduleRequest.cy.js`        | 2      | 0      | 2      | 00:10s   |
+| `pickup/schedulePickup.cy.js`       | 2      | 0      | 2      | 00:09s   |
+| `profile/profileAuth.cy.js`         | 2      | 1      | 1      | 00:08s   |
 
 ## Evidence Captured
 
 - **Screenshots:** `./cypress/screenshots/`
 - **Videos:** `./cypress/videos/`
-- **HTML Reports:**
+- **Full HTML Report:**
   - Cypress: `./mochawesome-report/mochawesome.html`
   - Jest: `./jest-report/report.html`
-
+- **Coverage Report:** `/coverage/lcov-report/index.html`
+  
 ---
 
 ## Conclusion
 
+- Despite multiple passing tests in authentication, admin, and navigation, several critical flows in pickup scheduling, feedback submission, and profile access **failed due to missing elements or improper validations**.
 - Most modules passed automated testing. Bugs found in filters, feedback, pickup,  and profile routing. Coverage acceptable. Regression required post-fixes.
 - **Critical Flows Tested:** Registration, Login, Admin Management, Feedback, Navigation
 - **Core Issues Detected:** Broken form renders, incorrect DOM selectors, missing accessibility roles

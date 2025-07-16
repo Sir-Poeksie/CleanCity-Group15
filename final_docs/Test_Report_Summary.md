@@ -3,7 +3,7 @@
 This summary consolidates the results of both **unit/component testing** (Jest) and **User Interface & End-to-End testing** (Cypress) for the CleanCity Waste Scheduler. It outlines the testing objective, techniques used, tools applied, and a breakdown of outcomes by module.
 
 > Related Reports:
->
+> - [Full Comprehensive QA Report]()
 > - [Test Execution Report](../final_docs/Test_Execution_Report.md)
 > - [Defect Report](../final_docs/Defect_Report.md)
 > - [Traceability Matrix](../final_docs/Traceability_Matrix.md)
