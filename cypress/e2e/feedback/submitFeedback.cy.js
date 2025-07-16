@@ -50,7 +50,7 @@ describe('Submit Feedback', () => {
   });
 });
 */
-/// <reference types="cypress" />
+
 
 describe('Feedback form', () => {
   beforeEach(() => {

@@ -5,9 +5,9 @@
     "passes": 1,
     "pending": 0,
     "failures": 1,
-    "start": "2025-07-16T10:33:10.409Z",
-    "end": "2025-07-16T10:33:18.899Z",
-    "duration": 8490,
+    "start": "2025-07-16T11:20:27.909Z",
+    "end": "2025-07-16T11:20:35.986Z",
+    "duration": 8077,
     "testsRegistered": 2,
     "passPercent": 50,
     "pendingPercent": 0,
@@ -18,7 +18,7 @@
   },
   "results": [
     {
-      "uuid": "3ac3041a-ef86-4805-be5d-2176eeded8d1",
+      "uuid": "fcbcb9d2-df6b-4563-9ec9-7014bb067560",
       "title": "",
       "fullFile": "cypress\\e2e\\profile\\profileAuth.cy.js",
       "file": "cypress\\e2e\\profile\\profileAuth.cy.js",
@@ -27,7 +27,7 @@
       "tests": [],
       "suites": [
         {
-          "uuid": "a6558a4b-4c91-4760-ab7f-f0c0a9b87358",
+          "uuid": "c035cf91-6350-4e00-a236-fe923490bac8",
           "title": "Profile auth guard",
           "fullFile": "",
           "file": "",
@@ -38,7 +38,7 @@
               "title": "redirects unauthenticated user to login",
               "fullTitle": "Profile auth guard redirects unauthenticated user to login",
               "timedOut": null,
-              "duration": 6110,
+              "duration": 5774,
               "state": "failed",
               "speed": null,
               "pass": false,
@@ -51,8 +51,8 @@
                 "estack": "AssertionError: Timed out retrying after 5000ms: expected '/profile' to equal '/login'\n    at Context.eval (webpack://cleancity-waste-scheduler/./cypress/e2e/profile/profileAuth.cy.js:7:47)",
                 "diff": "- '/profile'\n+ '/login'\n"
               },
-              "uuid": "b781cb1a-cdb8-44b2-8604-0f3f94c575f5",
-              "parentUUID": "a6558a4b-4c91-4760-ab7f-f0c0a9b87358",
+              "uuid": "aeac9480-5a88-474b-9a1e-72729e045eef",
+              "parentUUID": "c035cf91-6350-4e00-a236-fe923490bac8",
               "isHook": false,
               "skipped": false
             },
@@ -60,7 +60,7 @@
               "title": "shows profile info after loginAsUser helper",
               "fullTitle": "Profile auth guard shows profile info after loginAsUser helper",
               "timedOut": null,
-              "duration": 580,
+              "duration": 329,
               "state": "passed",
               "speed": "fast",
               "pass": true,
@@ -69,22 +69,22 @@
               "context": null,
               "code": "cy.loginAsUser();\ncy.visit('/profile');\ncy.contains('Demo User').should('exist');",
               "err": {},
-              "uuid": "eac17438-16fc-48d0-85a8-a703e02d59ec",
-              "parentUUID": "a6558a4b-4c91-4760-ab7f-f0c0a9b87358",
+              "uuid": "0f31a860-14d1-4e27-97d3-cf5f68451fc3",
+              "parentUUID": "c035cf91-6350-4e00-a236-fe923490bac8",
               "isHook": false,
               "skipped": false
             }
           ],
           "suites": [],
           "passes": [
-            "eac17438-16fc-48d0-85a8-a703e02d59ec"
+            "0f31a860-14d1-4e27-97d3-cf5f68451fc3"
           ],
           "failures": [
-            "b781cb1a-cdb8-44b2-8604-0f3f94c575f5"
+            "aeac9480-5a88-474b-9a1e-72729e045eef"
           ],
           "pending": [],
           "skipped": [],
-          "duration": 6690,
+          "duration": 6103,
           "root": false,
           "rootEmpty": false,
           "_timeout": 2000

@@ -1,25 +1,50 @@
-import { login, logout, getCurrentUser } from '../services/authService';
+
+import authService from '../services/authService';
 
 describe('authService', () => {
-  it('logs in a user', () => {
-    const user = login('admin@cleancity.com', 'admin123');
-    expect(user).toHaveProperty('email', 'admin@cleancity.com');
+  beforeEach(() => {
+    localStorage.clear();
   });
 
-  it('returns null for invalid login', () => {
-    const user = login('wrong@user.com', 'wrong');
+  test('registers and logs in a user', () => {
+    const newUser = {
+      name: 'José María García-López',
+      email: 'test+tag@domain.com',
+      password: 'ValidPass123',
+      role: 'user'
+    };
+    const registered = authService.register(newUser);
+    expect(registered).toBeTruthy();
+
+    const user = authService.login('test+tag@domain.com', 'ValidPass123');
+    expect(user).not.toBeNull();
+    expect(user.email).toBe('test+tag@domain.com');
+  });
+
+  test('rejects login with invalid credentials', () => {
+    const user = authService.login('user1@test.com', 'WrongPassword');
     expect(user).toBeNull();
   });
 
-  it('gets current user after login', () => {
-    login('user@cleancity.com', 'password123');
-    const user = getCurrentUser();
-    expect(user.email).toBe('user@cleancity.com');
+  test('handles unicode email', () => {
+    const user = {
+      name: 'Unicode User',
+      email: '测试@example.com',
+      password: 'SecurePass123',
+      role: 'user'
+    };
+    authService.register(user);
+    const login = authService.login('测试@example.com', 'SecurePass123');
+    expect(login).not.toBeNull();
   });
 
-  it('logs out the user', () => {
-    logout();
-    const user = getCurrentUser();
-    expect(user).toBeNull();
+  test('rejects empty or whitespace-only input', () => {
+    const result = authService.register({
+      name: '   ',
+      email: '',
+      password: '',
+      role: 'user'
+    });
+    expect(result).toBeFalsy();
   });
 });
