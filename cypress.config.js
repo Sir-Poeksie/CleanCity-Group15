@@ -25,7 +25,6 @@ module.exports = defineConfig({
         }
       });
 
-      // 👇 Override default shell to avoid PowerShell error
       config.env.TERM = 'cmd.exe';
       return config;
     },
