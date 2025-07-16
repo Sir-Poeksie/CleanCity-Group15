@@ -1,8 +1,8 @@
 # Comprehensive QA Report
 
-**Project:** CleanCity Waste Pickup Scheduler
-**Version:** 1.0
-**Date:** 2025-07-16
+**Project:** CleanCity Waste Pickup Scheduler<br>
+**Version:** 1.0<br>
+**Date:** 2025-07-16<br>
 **Prepared By:** Mpumelelo Theophilas Nxazonke (QA Automation Engineer)
 
 ---
@@ -44,7 +44,7 @@ This QA report presents the full scope of testing conducted for the **CleanCity 
 | Critical Defects       | 6           |
 | Total Defects Logged   | 13          |
 
-### 🔍 Key Findings
+### Key Findings
 
 * Missing validation messages across forms
 * Unreachable test files/components due to import errors
@@ -272,8 +272,8 @@ Full mitigation table in [Risk_Analysis.md](../final_docs/Risk_Analysis.md)
 
 ### Report Sign-Off
 
-**Prepared by:**
-Mpumelelo Theophilas Nxazonke
-QA Automation Engineer
-Date: 2025-07-15
-Contact: [mtnxazonke@gmail.com](mailto:mtnxazonke@gmail.com)
+**Prepared by:**<br>
+Mpumelelo Theophilas Nxazonke<br>
+QA Automation Engineer<br>
+Date: 2025-07-16<br>
+Contact: [Sir Poeksie](mailto:mtnxazonke@gmail.com)
