@@ -19,7 +19,7 @@ final_docs/<br>
  ├── Defect_Report.md<br>
  ├── Traceability_Matrix.md<br>
  ├── Regression_Checklist.md<br>
- └── bug-reports/
+ └── bug-reports/<br>
   └── Bug_<ID>.md (e.g. Bug_C-201.md)
 
 ---
@@ -38,6 +38,7 @@ final_docs/<br>
 | `Risk_Analysis.md` | Identified risks with mitigation strategy |
 | `Regression_Checklist.md`| Sanity and smoke check items post-fix |
 | `bug-reports/` | Individual Markdown files for each GitHub issue |
+|`Presentation Video Drive Folder` | Google Drive folder containing QA Presentation and PDF Deliverables |
 
 ---
 
