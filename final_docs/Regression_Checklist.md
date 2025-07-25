@@ -1,11 +1,11 @@
-# 🔁 Regression Checklist – CleanCity Waste Scheduler
+# Regression Checklist – CleanCity Waste Scheduler
 
 ## Purpose:
 Verify that critical flows and bugfixes remain stable after major changes or releases.
 
 ---
 
-## ✅ Core Modules to Retest
+## Core Modules to Retest
 
 | Feature                   | Regression Covered? | Notes |
 |---------------------------|---------------------|-------|
